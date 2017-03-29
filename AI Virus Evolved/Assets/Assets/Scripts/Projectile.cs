@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
+    public GameObject HitEffect;
+
     public float speed;
     public Transform target;
     public float proDamage;
@@ -59,7 +61,7 @@ public class Projectile : MonoBehaviour {
             }
         }
         target.gameObject.GetComponent<EnemyBehaviour>().health -= proDamage;
-        //add effect here
+        Instantiate(HitEffect, target.transform.position, target.transform.rotation);
         Destroy(gameObject);
     }
 }

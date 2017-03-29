@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-
     GameObject normPathObj;
     GameObject flyingPathObj;
     Transform targetPathNode;
@@ -88,7 +87,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     void BaseReached()
     {
-        GameObject.FindObjectOfType<InventoryController>().LoseLife();
+        GameObject.FindObjectOfType<InventoryController>().lives -= damage;
+        //better implementation
+       // GameObject.FindObjectOfType<InventoryController>().LoseLife();
         Destroy(gameObject);
     }
 

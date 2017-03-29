@@ -13,6 +13,7 @@ public class InventoryController : MonoBehaviour {
     public int currency = 100;
 
     public Text currencyText;
+    public Text livesText;
     //public Text livesText;
 
     public void Start()
@@ -24,6 +25,7 @@ public class InventoryController : MonoBehaviour {
 
     public void LoseLife()
     {
+        //TODO: lose lives here
         if (lives <= 0)
         {
             GameOver();
@@ -40,6 +42,7 @@ public class InventoryController : MonoBehaviour {
     {
         //This doesn't actually need to update the text every frame.
         currencyText.text = currency.ToString();
+        livesText.text = lives.ToString();
         //livesText.text = "Lives: " + lives.ToString();
 
         HealthBarRect.fillAmount = lives/Maxlives;
