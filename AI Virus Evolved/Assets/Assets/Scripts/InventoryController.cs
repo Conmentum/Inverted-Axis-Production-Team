@@ -5,12 +5,22 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour {
 
-    public int lives = 30;
+    //it's a float to work with the health bars
+    public float Maxlives = 30;
+    public float lives;
+
     //Change Based On Level
     public int currency = 100;
 
     public Text currencyText;
-    public Text livesText;
+    //public Text livesText;
+
+    public void Start()
+    {
+        lives = Maxlives;
+    }
+
+    public Image HealthBarRect;
 
     public void LoseLife()
     {
@@ -29,7 +39,9 @@ public class InventoryController : MonoBehaviour {
     void Update()
     {
         //This doesn't actually need to update the text every frame.
-        currencyText.text = "Money: $" + currency.ToString();
-        livesText.text = "Lives: " + lives.ToString();
+        currencyText.text = currency.ToString();
+        //livesText.text = "Lives: " + lives.ToString();
+
+        HealthBarRect.fillAmount = lives/Maxlives;
     }
 }
