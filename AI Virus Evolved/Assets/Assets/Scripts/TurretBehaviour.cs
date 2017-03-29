@@ -18,7 +18,7 @@ public class TurretBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        turretTransform = transform.Find("Turret");
+        turretTransform = this.transform;
 	}
 
     // Update is called once per frame
