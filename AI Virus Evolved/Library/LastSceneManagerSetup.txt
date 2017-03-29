@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/VictorsWorkingScene.unity
+- path: Assets/Assets/Scenes/Level 1 Mock.unity
   isLoaded: 1
   isActive: 1
