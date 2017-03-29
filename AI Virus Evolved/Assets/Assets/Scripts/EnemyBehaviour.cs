@@ -56,6 +56,10 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+            Die();
+        }
         if (targetPathNode == null)
         {
             GetNextNode();
@@ -85,7 +89,6 @@ public class EnemyBehaviour : MonoBehaviour
     void BaseReached()
     {
         GameObject.FindObjectOfType<InventoryController>().LoseLife();
-        GameObject.FindObjectOfType<InventoryController>().lives -= this.gameObject.GetComponent<EnemyBehaviour>().damage;
         Destroy(gameObject);
     }
 

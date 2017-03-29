@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour {
 
     public float speed;
     public Transform target;
-    public float damage;
+    public float proDamage;
     public float radius;
 
 	// Use this for initialization
@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour {
     {
         if (radius == 0)
         {
-            target.GetComponent<EnemyBehaviour>().TakeDamage(damage);
+            target.GetComponent<EnemyBehaviour>().TakeDamage(proDamage);
         }
         else
         {
@@ -54,10 +54,11 @@ public class Projectile : MonoBehaviour {
                 EnemyBehaviour e = cc.GetComponent<EnemyBehaviour>();
                 if(e != null)
                 {
-                    e.GetComponent<EnemyBehaviour>().TakeDamage(damage);
+                    e.GetComponent<EnemyBehaviour>().TakeDamage(proDamage);
                 }
             }
         }
+        target.gameObject.GetComponent<EnemyBehaviour>().health -= proDamage;
         //add effect here
         Destroy(gameObject);
     }

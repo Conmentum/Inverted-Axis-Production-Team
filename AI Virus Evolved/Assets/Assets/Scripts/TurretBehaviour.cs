@@ -51,14 +51,17 @@ public class TurretBehaviour : MonoBehaviour {
         if(atkCoolDownLeft <= 0 && dirRot.magnitude <= range)
         {
             atkCoolDownLeft = atkCoolDown;
-            //ShootAtEnemy
+            ShootEnemy(closestEnemy);
         }
     }
 
-   /* void ShootEnemy(EnemyBehaviour e)
+   void ShootEnemy(EnemyBehaviour e)
     {
         GameObject projectileObj = (GameObject)Instantiate(projectPrefab, this.transform.position, this.transform.rotation);
 
         Projectile p = projectileObj.GetComponent<Projectile>();
-    }*/
+        p.target = e.transform;
+        p.proDamage = damage;
+        p.radius = radius;
+    }
 }
