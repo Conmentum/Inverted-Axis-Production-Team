@@ -62,6 +62,6 @@ public class Projectile : MonoBehaviour {
         }
         target.gameObject.GetComponent<EnemyBehaviour>().health -= proDamage;
         Instantiate(HitEffect, target.transform.position, target.transform.rotation);
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
