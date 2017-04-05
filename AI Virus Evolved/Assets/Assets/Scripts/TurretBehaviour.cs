@@ -38,7 +38,7 @@ public class TurretBehaviour : MonoBehaviour {
         }
         if (closestEnemy == null)
         {
-            Debug.Log("No Enemies");
+            print("Wave Complete");
             return;
         }
 
