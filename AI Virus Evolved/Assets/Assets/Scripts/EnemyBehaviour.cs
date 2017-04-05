@@ -6,6 +6,7 @@ public class EnemyBehaviour : MonoBehaviour
 {
     GameObject normPathObj;
     GameObject flyingPathObj;
+    public GameObject DeathEffect;
     Transform targetPathNode;
     int pathNodeIndex = 0;
 
@@ -58,6 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            Instantiate(DeathEffect, transform.position, transform.rotation);
         }
         if (targetPathNode == null)
         {
