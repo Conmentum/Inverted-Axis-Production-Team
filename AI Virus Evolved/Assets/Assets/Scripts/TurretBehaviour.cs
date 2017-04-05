@@ -29,8 +29,7 @@ public class TurretBehaviour : MonoBehaviour {
         float dist = Mathf.Infinity;
         foreach (EnemyBehaviour e in enemies) {
             float DistFromEnemy = Vector3.Distance(this.transform.position, e.transform.transform.position);
-
-            if (closestEnemy == null || damage < dist)
+            if (closestEnemy == null || DistFromEnemy < dist)
             {
                 closestEnemy = e;
                 dist = DistFromEnemy;
