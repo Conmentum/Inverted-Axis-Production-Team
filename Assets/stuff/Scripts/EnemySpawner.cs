@@ -45,7 +45,8 @@ public class EnemySpawner : MonoBehaviour {
                 }
                 else
                 {
-                    //Wave over
+                    return;
+                    //next wave
                 }
                 Destroy(gameObject);
             }
