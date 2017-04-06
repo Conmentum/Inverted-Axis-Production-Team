@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
 
-    public float spawnCoolDown = 0.25f;
+    public float spawnCoolDown = 0.75f;
     public float spawnCDLeft = 5;
 
     [System.Serializable]

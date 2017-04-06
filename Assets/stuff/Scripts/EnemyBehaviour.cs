@@ -24,7 +24,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void GetNextNode()
     {
-        if (this.gameObject.name != "Enemy_Aerial")
+        if (this.gameObject.name != "Enemy_Aerial(Clone)")
         {
             if (pathNodeIndex < normPathObj.transform.childCount)
             {
@@ -37,7 +37,7 @@ public class EnemyBehaviour : MonoBehaviour
                 BaseReached();
             }
         }
-        if (this.gameObject.name == "Enemy_Aerial")
+        if (this.gameObject.name == "Enemy_Aerial(Clone)")
         {
             if (pathNodeIndex < flyingPathObj.transform.childCount)
             {
