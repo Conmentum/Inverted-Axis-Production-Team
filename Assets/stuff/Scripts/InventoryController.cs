@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventoryController : MonoBehaviour {
 
@@ -15,6 +16,11 @@ public class InventoryController : MonoBehaviour {
     public Text currencyText;
     public Text livesText;
     //public Text livesText;
+
+    [SerializeField]
+    public Button Quit;
+    [SerializeField]
+    public Button Restart;
 
     public void Start()
     {
@@ -47,4 +53,15 @@ public class InventoryController : MonoBehaviour {
 
         HealthBarRect.fillAmount = lives/Maxlives;
     }
+
+    public void OnExit()
+    {
+        Application.Quit();
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }
