@@ -39,6 +39,7 @@ public class TurretBehaviour : MonoBehaviour {
         {
             print("Wave Complete");
             return;
+            // start new wave in wave spawner after time?
         }
 
         Vector3 dirRot = closestEnemy.transform.position - this.transform.position;
