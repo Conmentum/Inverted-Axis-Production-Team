@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
-
+public class EnemySpawner : MonoBehaviour
+{
     public float spawnCoolDown = 0.75f;
     public float spawnCDLeft = 5;
+    //public GameObject nextWave;
+    public GameObject nextWaveEffect;
+    public GameObject spawnEffect;
+    public AudioClip nextWaveSFX;
+    public AudioClip eSpawnSFX;
+    public float timeTillnextWave = 3f;
 
     [System.Serializable]
     public class WaveBehaviour
@@ -15,41 +21,62 @@ public class EnemySpawner : MonoBehaviour {
         [System.NonSerialized]
         public int spawned = 0;
     }
+    
 
     public WaveBehaviour[] waveBehaves;
 
-	// Update is called once per frame
-	void Update () {
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        SpawningSystem();
+    }
+
+    public void SpawningSystem()
+    {
         spawnCDLeft -= Time.deltaTime;
-        if(spawnCDLeft < 0)
+        //TODO: make the first wave start on a button click
+        if (spawnCDLeft < 0)
         {
             spawnCDLeft = spawnCoolDown;
             bool eSpawned = false;
 
-            foreach(WaveBehaviour wb in waveBehaves)
+            foreach (WaveBehaviour wb in waveBehaves)
             {
-                if(wb.spawned < wb.num)
+                if (wb.spawned < wb.num)
                 {
                     wb.spawned++;
                     Instantiate(wb.EPrefab, this.transform.position, this.transform.rotation);
-
+                    //Instantiate(eSpawnSFX);
                     eSpawned = true;
                     break;
                 }
             }
-            if(eSpawned == false)
+            if (eSpawned == false)
             {
-                if(transform.parent.childCount > 1)
+                if (transform.parent.childCount > 1)
                 {
                     transform.parent.GetChild(1).gameObject.SetActive(true);
                 }
                 else
                 {
-                    return;
-                    //next wave
+                    print("Level Complete");
+                    timeTillnextWave -= Time.deltaTime + 1;
+                    print(timeTillnextWave);
+                    if (timeTillnextWave <= 0)
+                    {
+                        print("wave done");
+                        Instantiate(nextWaveSFX);
+                        Instantiate(nextWaveEffect, this.transform.position, this.transform.rotation);
+                        //TODO: Fix this:
+                        //Instantiate(nextWave, parent.transform.position, parent.transform.rotation);
+                        gameObject.SetActive(false);
+                    }
                 }
-                Destroy(gameObject);
             }
         }
-	}
+    }
 }

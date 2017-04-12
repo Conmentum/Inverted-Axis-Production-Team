@@ -10,6 +10,7 @@ public class TurretBehaviour : MonoBehaviour {
     public int cost;
 
     public float range;
+    public float distFromEnemy;
     public float atkCoolDown;
     public float atkCoolDownLeft;
 
@@ -22,36 +23,40 @@ public class TurretBehaviour : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
         EnemyBehaviour closestEnemy = null;
-
+      
         float dist = Mathf.Infinity;
-        foreach (EnemyBehaviour e in enemies) {
-            float DistFromEnemy = Vector3.Distance(this.transform.position, e.transform.transform.position);
-            if (closestEnemy == null || DistFromEnemy < dist)
+        foreach (EnemyBehaviour e in enemies)
+        {
+            distFromEnemy = Vector3.Distance(this.transform.position, e.transform.transform.position);
+            if (closestEnemy == null || distFromEnemy < dist)
             {
                 closestEnemy = e;
-                dist = DistFromEnemy;
+                dist = distFromEnemy;
             }
         }
         if (closestEnemy == null)
         {
-            print("Wave Complete");
             return;
             // start new wave in wave spawner after time?
         }
-
-        Vector3 dirRot = closestEnemy.transform.position - this.transform.position;
-
-        Quaternion lookRot = Quaternion.LookRotation(dirRot);
-        turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
-
         atkCoolDownLeft -= Time.deltaTime;
-        if(atkCoolDownLeft <= 0 && dirRot.magnitude <= range)
+        if (distFromEnemy <= range)
         {
-            atkCoolDownLeft = atkCoolDown;
-            ShootEnemy(closestEnemy);
+            Vector3 dirRot = closestEnemy.transform.position - this.transform.position;
+
+            Quaternion lookRot = Quaternion.LookRotation(dirRot);
+            turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
+
+            
+            if (atkCoolDownLeft <= 0 && dirRot.magnitude <= range)
+            {
+                atkCoolDownLeft = atkCoolDown;
+                ShootEnemy(closestEnemy);
+            }
         }
     }
 
