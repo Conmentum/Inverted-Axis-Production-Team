@@ -54,6 +54,7 @@ public class InventoryController : MonoBehaviour {
         //This doesn't actually need to update the text every frame.
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
+        LoseLife();
         //livesText.text = "Lives: " + lives.ToString();
 
         HealthBarRect.fillAmount = lives/Maxlives;
