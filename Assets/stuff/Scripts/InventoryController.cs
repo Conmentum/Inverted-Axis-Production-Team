@@ -15,7 +15,10 @@ public class InventoryController : MonoBehaviour {
 
     public Text currencyText;
     public Text livesText;
-    //public Text livesText;
+	public Text endLives;
+    public GameObject generalCanvas;
+	public GameObject victoryCan;
+	public GameObject failCan;
 
     [SerializeField]
     public Button Quit;
@@ -41,11 +44,13 @@ public class InventoryController : MonoBehaviour {
     public void GameOver()
     {
         Debug.Log("Game Over");
-        //show gameover screen
+        generalCanvas.SetActive(false);
+        failCan.SetActive(true);
     }
 
     void Update()
     {
+        
         //This doesn't actually need to update the text every frame.
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
@@ -63,5 +68,8 @@ public class InventoryController : MonoBehaviour {
     {
         SceneManager.LoadScene(0);
     }
-
+	public void VictoryMenu(){
+        generalCanvas.SetActive(false);
+        victoryCan.SetActive(true);
+	}
 }

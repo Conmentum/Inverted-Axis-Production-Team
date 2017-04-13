@@ -89,10 +89,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     void BaseReached()
     {
-        GameObject.FindObjectOfType<InventoryController>().lives -= damage;
-        //better implementation
-       // GameObject.FindObjectOfType<InventoryController>().LoseLife();
-        Destroy(gameObject);
+		if (this.gameObject.tag != "Boss") {
+			GameObject.FindObjectOfType<InventoryController> ().lives -= damage;
+			//better implementation
+			Destroy (gameObject);
+		}
+		if (this.gameObject.tag == "Boss") {
+			FindObjectOfType<InventoryController> ().GameOver ();
+		}
     }
 
     public void TakeDamage(float damage)
@@ -106,8 +110,15 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Die()
     {
-        GameObject.FindObjectOfType<InventoryController>().currency += curValue;
-        //add death effect
-        Destroy(gameObject);
+		if (this.gameObject.name != "Enemy_Boss(Clone)") 
+		{	
+			GameObject.FindObjectOfType<InventoryController> ().currency += curValue;
+			Instantiate (DeathEffect);
+			Destroy(gameObject);
+		}
+		if (this.gameObject.tag == "Boss") {
+			FindObjectOfType<InventoryController> ().VictoryMenu ();
+			Destroy(gameObject);
+		}
     }
 }
