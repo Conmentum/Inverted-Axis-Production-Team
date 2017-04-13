@@ -13,4 +13,12 @@ public class AudioManager : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void playUISound()
+    {
+
+    }
+    public void PlayEnemySound()
+    {
+
+    }
 }
