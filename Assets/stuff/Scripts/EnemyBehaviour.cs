@@ -1,23 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
     GameObject normPathObj;
     GameObject flyingPathObj;
     public GameObject DeathEffect;
+
     Transform targetPathNode;
     int pathNodeIndex = 0;
 
+    
+    public Image Healthbar;
+
+    [SerializeField]
+    private float WTFPLS;
+
+    [Header("Stats")]
     public float speed;
     public int damage;
     public float health;
+    public float CurrentHealth;
     public int curValue;
 
     // Use this for initialization
     void Start()
     {
+        //Healthbar = GetComponent<Image>();
+
+        CurrentHealth = health;
+        Debug.Log("Health set");
+
         normPathObj = GameObject.Find("Normal Path");
         flyingPathObj = GameObject.Find("Flying Path");
     }
@@ -56,7 +71,8 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+
+        if (CurrentHealth <= 0)
         {
             Die();
             Instantiate(DeathEffect, transform.position, transform.rotation);
@@ -101,8 +117,14 @@ public class EnemyBehaviour : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
-        if (health <= 0)
+        Healthbar.fillAmount = CurrentHealth / health;
+
+        WTFPLS = CurrentHealth / health;
+        Debug.Log(WTFPLS);
+
+        CurrentHealth -= damage;
+
+        if (CurrentHealth <= 0)
         {
             Die();
         }
