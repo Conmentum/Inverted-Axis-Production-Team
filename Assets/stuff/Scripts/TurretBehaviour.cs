@@ -31,9 +31,10 @@ public class TurretBehaviour : MonoBehaviour {
         float dist = Mathf.Infinity;
         foreach (EnemyBehaviour e in enemies)
         {
-            distFromEnemy = Vector3.Distance(this.transform.position, e.transform.transform.position);
+            distFromEnemy = Vector3.Distance(this.transform.position, e.transform.position);
             if (closestEnemy == null || distFromEnemy < dist)
             {
+
                 closestEnemy = e;
                 dist = distFromEnemy;
             }
@@ -41,7 +42,6 @@ public class TurretBehaviour : MonoBehaviour {
         if (closestEnemy == null)
         {
             return;
-            // start new wave in wave spawner after time?
         }
         atkCoolDownLeft -= Time.deltaTime;
         if (distFromEnemy <= range)
