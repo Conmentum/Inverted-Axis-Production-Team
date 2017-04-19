@@ -29,19 +29,18 @@ public class TurretBehaviour : MonoBehaviour {
         EnemyBehaviour closestEnemy = null;
       
         float dist = Mathf.Infinity;
-        foreach (EnemyBehaviour e in enemies)
+        foreach (EnemyBehaviour enemy in enemies)
         {
-            distFromEnemy = Vector3.Distance(this.transform.position, e.transform.transform.position);
+            distFromEnemy = Vector3.Distance(enemy.transform.transform.position, this.transform.position);
             if (closestEnemy == null || distFromEnemy < dist)
             {
-                closestEnemy = e;
+                closestEnemy = enemy;
                 dist = distFromEnemy;
             }
         }
         if (closestEnemy == null)
         {
             return;
-            // start new wave in wave spawner after time?
         }
         atkCoolDownLeft -= Time.deltaTime;
         if (distFromEnemy <= range)
