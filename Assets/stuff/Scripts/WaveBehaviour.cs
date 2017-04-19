@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class WaveBehaviour : MonoBehaviour {
     public GameObject newWave;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.gameObject.GetComponentInChildren<EnemySpawner> () == null) {
-			Instantiate (newWave, this.transform.position, this.transform.rotation);
-			Destroy (gameObject);
-        
-			if (newWave == null) {
-				return;
-			}
-		}
+        if (this.gameObject.GetComponentInChildren<EnemySpawner>() == null)
+        {
+            if (FindObjectOfType<GameController>().NewWave == true)
+            {
+                Instantiate(newWave, this.transform.position, this.transform.rotation);
+                Destroy(gameObject);
+            }
+        }
+
 	}
 }

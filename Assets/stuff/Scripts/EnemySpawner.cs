@@ -7,10 +7,6 @@ public class EnemySpawner : MonoBehaviour
     public float spawnCoolDown = 0.75f;
     public float spawnCDLeft = 5;
     //public GameObject nextWave;
-    public GameObject nextWaveEffect;
-    public GameObject spawnEffect;
-    public AudioClip nextWaveSFX;
-    public AudioClip eSpawnSFX;
     public float timeTillnextWave = 3f;
 
     [System.Serializable]
@@ -63,16 +59,11 @@ public class EnemySpawner : MonoBehaviour
                 }
                 else
                 {
-                    print("Level Complete");
                     timeTillnextWave -= Time.deltaTime + 1;
                     print(timeTillnextWave);
                     if (timeTillnextWave <= 0)
                     {
                         print("wave done");
-                        Instantiate(nextWaveSFX);
-                        Instantiate(nextWaveEffect, this.transform.position, this.transform.rotation);
-                        //TODO: Fix this:
-                        //Instantiate(nextWave, parent.transform.position, parent.transform.rotation);
                         gameObject.SetActive(false);
                     }
                 }

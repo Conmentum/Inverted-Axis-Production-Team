@@ -23,19 +23,26 @@ public class TurretBehaviour : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
         EnemyBehaviour closestEnemy = null;
       
         float dist = Mathf.Infinity;
-        foreach (EnemyBehaviour e in enemies)
+        foreach (EnemyBehaviour enemy in enemies)
         {
+<<<<<<< HEAD
             distFromEnemy = Vector3.Distance(this.transform.position, e.transform.position);
             if (closestEnemy == null || distFromEnemy < dist)
             {
 
                 closestEnemy = e;
+=======
+            distFromEnemy = Vector3.Distance(enemy.transform.transform.position, this.transform.position);
+            if (closestEnemy == null || distFromEnemy < dist)
+            {
+                closestEnemy = enemy;
+>>>>>>> 351d5ec770f1b04a670837672ebeb6cc2cc1d113
                 dist = distFromEnemy;
             }
         }
