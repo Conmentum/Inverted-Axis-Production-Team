@@ -64,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
                     if (timeTillnextWave <= 0)
                     {
                         print("wave done");
-                        Destroy(gameObject);
+                        gameObject.SetActive(false);
                     }
                 }
             }

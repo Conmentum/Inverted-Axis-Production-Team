@@ -9,8 +9,12 @@ public class WaveBehaviour : MonoBehaviour {
 	void Update () {
         if (this.gameObject.GetComponentInChildren<EnemySpawner>() == null)
         {
-            Instantiate(newWave, this.transform.position, this.transform.rotation);
-            Destroy(gameObject);
+            if (FindObjectOfType<GameController>().NewWave == true)
+            {
+                Instantiate(newWave, this.transform.position, this.transform.rotation);
+                Destroy(gameObject);
+            }
         }
+
 	}
 }

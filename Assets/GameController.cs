@@ -5,19 +5,20 @@ using UnityEngine.UI;
 using UnityEditor.SceneManagement;
 
 public class GameController : MonoBehaviour {
-    public GameObject eSpawner;
+    public bool NewWave;
+    public WaveBehaviour wb;
 
 	// Use this for initialization
 	void Start () {
-		
+        NewWave = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        eSpawner = GameObject.FindGameObjectWithTag("WaveSpawner");
+
 	}
-    public void RestartLevel()
+    public void StartNewWave()
     {
-        //load this scene
+        NewWave = true;
     }
 }

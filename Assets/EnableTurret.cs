@@ -8,22 +8,25 @@ public class EnableTurret : MonoBehaviour {
     public float towerCost;
     //Dragged in via inspector, 
     public GameObject towerSelected;
+    public GameObject unlockedIMG;
+    public GameObject lockedIMG;
 
     void Start()
     {
-        
         towerCost = towerSelected.GetComponent<TurretBehaviour>().cost;
     }
     // Update is called once per frame
     void Update () {
-		currentCurrency = GameObject.FindObjectOfType<InventoryController>().currency;
+        currentCurrency = FindObjectOfType<InventoryController>().currency;
         if (towerCost > currentCurrency)
         {
-            gameObject.SetActive(true);
+            unlockedIMG.SetActive(false);
+            lockedIMG.SetActive(true);
         }
         else
         {
-            gameObject.SetActive(false);
+            unlockedIMG.SetActive(true);
+            lockedIMG.SetActive(false);
         }
 	}
 }
