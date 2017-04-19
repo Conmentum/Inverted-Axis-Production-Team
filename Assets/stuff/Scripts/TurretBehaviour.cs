@@ -23,7 +23,7 @@ public class TurretBehaviour : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
         EnemyBehaviour closestEnemy = null;

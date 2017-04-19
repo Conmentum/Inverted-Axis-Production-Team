@@ -15,7 +15,6 @@ public class InventoryController : MonoBehaviour {
 
     public Text currencyText;
     public Text livesText;
-	public Text endLives;
     public GameObject generalCanvas;
 	public GameObject victoryCan;
 	public GameObject failCan;
