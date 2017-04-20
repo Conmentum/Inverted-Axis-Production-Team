@@ -54,7 +54,6 @@ public class InventoryController : MonoBehaviour {
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
         LoseLife();
-        //livesText.text = "Lives: " + lives.ToString();
 
         HealthBarRect.fillAmount = lives/Maxlives;
     }
