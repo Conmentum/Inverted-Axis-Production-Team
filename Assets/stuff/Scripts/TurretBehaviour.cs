@@ -13,7 +13,7 @@ public class TurretBehaviour : MonoBehaviour
     public float range;
     public float distFromEnemy;
     public float atkCoolDown;
-    public float atkCoolDownLeft;
+    private float atkCoolDownLeft;
 
     public float damage;
     public float radius;
@@ -26,6 +26,7 @@ public class TurretBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        atkCoolDownLeft -= Time.deltaTime;
         EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
         EnemyBehaviour closestEnemy = null;
 
@@ -50,7 +51,7 @@ public class TurretBehaviour : MonoBehaviour
             {
                 return;
             }
-            atkCoolDownLeft -= Time.deltaTime;
+            
             if (distFromEnemy <= range)
             {
                 Vector3 dirRot = closestEnemy.transform.position - this.transform.position;
