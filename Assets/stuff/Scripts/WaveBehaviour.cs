@@ -12,7 +12,8 @@ public class WaveBehaviour : MonoBehaviour {
             if (FindObjectOfType<GameController>().NewWave == true)
             {
                 Instantiate(newWave, this.transform.position, this.transform.rotation);
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 

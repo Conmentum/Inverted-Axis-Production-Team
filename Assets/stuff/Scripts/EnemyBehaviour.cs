@@ -9,14 +9,13 @@ public class EnemyBehaviour : MonoBehaviour
     GameObject flyingPathObj;
     public GameObject DeathEffect;
 
+    public Transform EnemyTransform;
+
     Transform targetPathNode;
     int pathNodeIndex = 0;
 
     
     public Image Healthbar;
-
-    [SerializeField]
-    private float WTFPLS;
 
     [Header("Stats")]
     public float speed;
@@ -99,7 +98,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             transform.Translate(direction.normalized * distanceByFrame, Space.World);
             Quaternion rotationToNode = Quaternion.LookRotation(direction);
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, rotationToNode, Time.deltaTime*speed);
+            //this part is changed from (this.transform.rotation) to enemytransform.rotation
+            EnemyTransform.rotation = Quaternion.Lerp(EnemyTransform.rotation, rotationToNode, Time.deltaTime*speed);
         }
     }
 
@@ -118,9 +118,6 @@ public class EnemyBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Healthbar.fillAmount = CurrentHealth / health;
-
-        WTFPLS = CurrentHealth / health;
-        Debug.Log(WTFPLS);
 
         CurrentHealth -= damage;
 

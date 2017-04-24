@@ -15,6 +15,21 @@ public class InventoryController : MonoBehaviour {
 
     public Text currencyText;
     public Text livesText;
+
+    public Text NormalCostText;
+    public Text SlowingCostText;
+    public Text FireCostText;
+    public Text AerialCostText;
+    public Text AreaDMGCostText;
+
+    public int NormalCost;
+    public int SlowingCost;
+    public int FireCost;
+    public int AerialCost;
+    public int AreaDMGCost;
+
+
+
     public GameObject generalCanvas;
 	public GameObject victoryCan;
 	public GameObject failCan;
@@ -27,6 +42,12 @@ public class InventoryController : MonoBehaviour {
     public void Start()
     {
         lives = Maxlives;
+
+        NormalCostText.text = NormalCost.ToString();
+        SlowingCostText.text = SlowingCost.ToString();
+        FireCostText.text = FireCost.ToString();
+        AerialCostText.text = AerialCost.ToString();
+        AreaDMGCostText.text = AreaDMGCost.ToString();
     }
 
     public Image HealthBarRect;
