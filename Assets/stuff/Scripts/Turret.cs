@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalTurret_Behaviour : MonoBehaviour {
+public class Turret : TurretBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	void Start(){
 		
 	}
 	

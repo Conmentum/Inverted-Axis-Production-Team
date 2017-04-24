@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
+	public List<GameObject> enemies;
     public bool NewWave;
 	// Use this for initialization
 	void Start () {
@@ -17,4 +18,12 @@ public class GameController : MonoBehaviour {
     {
         NewWave = true;
     }
+	public void EnemySpawned(GameObject _new){
+		enemies.Add (_new);
+	}
+
+	public void EnemyDeath(GameObject _Death)
+	{
+		enemies.Remove (_Death);
+	}
 }

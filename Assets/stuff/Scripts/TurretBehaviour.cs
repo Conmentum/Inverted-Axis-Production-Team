@@ -27,6 +27,7 @@ public class TurretBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         atkCoolDownLeft -= Time.deltaTime;
+		//list
         EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
         EnemyBehaviour closestEnemy = null;
 
@@ -43,7 +44,6 @@ public class TurretBehaviour : MonoBehaviour
                 if (closestEnemy == null || distFromEnemy < dist)
                 {
                     closestEnemy = enemy;
-
                     dist = distFromEnemy;
                 }
             }
