@@ -18,7 +18,10 @@ public class EnemyBehaviour : MonoBehaviour
     public Image Healthbar;
 
     [Header("Stats")]
+    public float MaxSpeed;
     public float speed;
+    private float slowCooldown = 3;
+    public bool slowed;
     public int damage;
     public float health;
     public float CurrentHealth;
@@ -28,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Start()
     {
         //Healthbar = GetComponent<Image>();
-
+        speed = MaxSpeed;
         CurrentHealth = health;
         Debug.Log("Health set");
 
@@ -70,12 +73,14 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HasBeenSlowed();
 
         if (CurrentHealth <= 0)
         {
             Die();
             Instantiate(DeathEffect, transform.position, transform.rotation);
         }
+
         if (targetPathNode == null)
         {
             GetNextNode();
@@ -139,5 +144,28 @@ public class EnemyBehaviour : MonoBehaviour
 			FindObjectOfType<InventoryController> ().VictoryMenu ();
 			Destroy(gameObject);
 		}
+    }
+    public void HasBeenSlowed()
+    {
+        if (slowed == true)
+        {
+            {
+                if (slowCooldown >= 0)
+                {
+                    slowCooldown -= Time.deltaTime;
+                    speed = MaxSpeed / 2;
+                }
+                if (slowCooldown <= 0)
+                {
+                    speed = MaxSpeed;
+                    slowed = false;
+                    slowCooldown = 3;
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 }
