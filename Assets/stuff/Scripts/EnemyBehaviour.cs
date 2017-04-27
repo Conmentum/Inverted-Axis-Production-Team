@@ -134,14 +134,20 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Die()
     {
+
 		if (this.gameObject.name != "Enemy_Boss(Clone)") 
-		{	
+		{
+            AudioManager.Instance.PlaySound("ShortExplosion");
+
 			GameObject.FindObjectOfType<InventoryController> ().currency += curValue;
 			Instantiate (DeathEffect);
 			Destroy(gameObject);
 		}
-		if (this.gameObject.tag == "Boss") {
-			FindObjectOfType<InventoryController> ().VictoryMenu ();
+		if (this.gameObject.tag == "Boss")
+        {
+            AudioManager.Instance.PlaySound("Explosion");
+
+            FindObjectOfType<InventoryController> ().VictoryMenu ();
 			Destroy(gameObject);
 		}
     }

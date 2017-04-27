@@ -65,6 +65,32 @@ public class TurretBehaviour : MonoBehaviour
 
     public void ShootEnemy(EnemyBehaviour closestEnemy)
     {
+        if (this.tag == "Normal")
+        {
+            AudioManager.Instance.PlaySound("Pew1");
+        }
+
+        if (this.tag == "Slow")
+        {
+            AudioManager.Instance.PlaySound("Pew2");
+        }
+
+        if (this.tag == "Fire")
+        {
+            AudioManager.Instance.PlaySound("Pew3");
+        }
+
+        if (this.tag == "Aerial")
+        {
+            AudioManager.Instance.PlaySound("Pew4");
+        }
+
+        if (this.tag == "AreaDMG")
+        {
+            AudioManager.Instance.PlaySound("Pew5");
+        }
+
+
         GameObject projectileObj = (GameObject)Instantiate(projectPrefab, this.transform.position, this.transform.rotation);
         Projectile p = projectileObj.GetComponent<Projectile>();
         p.target = closestEnemy.transform;

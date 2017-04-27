@@ -84,6 +84,11 @@ public class InventoryController : MonoBehaviour {
         Application.Quit();
     }
 
+    public void OnQuit()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(0);
