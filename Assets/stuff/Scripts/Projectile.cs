@@ -11,8 +11,8 @@ public class Projectile : MonoBehaviour {
     public float proDamage;
     public float radius;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -25,11 +25,14 @@ public class Projectile : MonoBehaviour {
         }
 
         Vector3 dirToTarget = target.position - this.transform.localPosition;
-
         float distThisFrame = speed * Time.deltaTime;
 
         if (dirToTarget.magnitude <= distThisFrame)
         {
+            if (this.gameObject.tag == "Slow")
+            {
+                SlowTarget();
+            }
             ProjectileHit();
         }
         else
@@ -49,8 +52,6 @@ public class Projectile : MonoBehaviour {
         else
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-
-
             foreach(Collider cc in colliders)
             {
                 EnemyBehaviour e = cc.GetComponent<EnemyBehaviour>();
@@ -63,5 +64,9 @@ public class Projectile : MonoBehaviour {
         target.gameObject.GetComponent<EnemyBehaviour>().CurrentHealth -= proDamage;
         Instantiate(HitEffect, target.transform.position, target.transform.rotation);
         Destroy(this.gameObject);
+    }
+    void SlowTarget()
+    {
+        target.GetComponent<EnemyBehaviour>().slowed = true;
     }
 }
