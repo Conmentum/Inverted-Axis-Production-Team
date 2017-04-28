@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     //public GameObject nextWave;
     public float timeTillnextWave = 3f;
     public bool waveActive;
+    public bool eSpawned;
 
     [System.Serializable]
     public class WaveBehaviour
@@ -45,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
             if (spawnCDLeft < 0)
             {
                 spawnCDLeft = spawnCoolDown;
-                bool eSpawned = false;
+                eSpawned = false;
 
                 foreach (WaveBehaviour wb in waveBehaves)
                 {

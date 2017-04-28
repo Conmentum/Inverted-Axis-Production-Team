@@ -17,13 +17,14 @@ public class GameController : MonoBehaviour {
         }
         Tutor_UI.SetActive(true);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (NewWave == true)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (NewWave == true)
         {
             FindObjectOfType<EnemySpawner>().SpawningSystem();
-            if (FindObjectOfType<EnemySpawner>()== null)
+            if (FindObjectOfType<EnemySpawner>() == null)
             {
                 NewWave = false;
                 return;
