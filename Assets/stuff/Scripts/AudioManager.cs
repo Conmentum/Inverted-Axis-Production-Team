@@ -45,8 +45,6 @@ public class AudioManager : MonoBehaviour {
     [SerializeField]
     Sound[] sounds;
 
-    public bool DestroyOnLoad;
-
     //create a singleton
     public static AudioManager Instance;
 
@@ -61,7 +59,6 @@ public class AudioManager : MonoBehaviour {
         {
             Destroy(this);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
