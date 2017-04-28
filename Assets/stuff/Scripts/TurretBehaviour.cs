@@ -26,41 +26,87 @@ public class TurretBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
-
-        EnemyBehaviour closestEnemy = null;
-        float dist = Mathf.Infinity;
-
-        foreach (EnemyBehaviour e in enemies)
+        if (this.gameObject.tag != "Aerial")
         {
-            float d = Vector3.Distance(this.transform.position, e.transform.position);
-            if (closestEnemy == null || d < dist)
+            EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
+
+            EnemyBehaviour closestEnemy = null;
+            float dist = Mathf.Infinity;
+
+            foreach (EnemyBehaviour e in enemies)
             {
-                closestEnemy = e;
-                dist = d;
+                if (e.gameObject.tag != "Aerial")
+                {
+                    float d = Vector3.Distance(this.transform.position, e.transform.position);
+                    if (closestEnemy == null || d < dist)
+                    {
+                        closestEnemy = e;
+                        dist = d;
+                    }
+                }
+            }
+
+            if (closestEnemy == null)
+            {
+                Debug.Log("No enemies?");
+                return;
+            }
+
+            Vector3 dir = closestEnemy.transform.position - this.transform.position;
+
+            Quaternion lookRot = Quaternion.LookRotation(dir);
+
+            //Debug.Log(lookRot.eulerAngles.y);
+            turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
+
+            atkCoolDownLeft -= Time.deltaTime;
+            if (atkCoolDownLeft <= 0 && dir.magnitude <= range)
+            {
+                atkCoolDownLeft = atkCoolDown;
+                ShootEnemy(closestEnemy);
+            }
+
+        }
+        if (this.gameObject.tag == "Aerial")
+        {
+            EnemyBehaviour[] enemies = GameObject.FindObjectsOfType<EnemyBehaviour>();
+
+            EnemyBehaviour closestEnemy = null;
+            float dist = Mathf.Infinity;
+
+            foreach (EnemyBehaviour e in enemies)
+            {
+                if (e.gameObject.tag == "Aerial")
+                {
+                    float d = Vector3.Distance(this.transform.position, e.transform.position);
+                    if (closestEnemy == null || d < dist)
+                    {
+                        closestEnemy = e;
+                        dist = d;
+                    }
+                }
+            }
+
+            if (closestEnemy == null)
+            {
+                Debug.Log("No enemies?");
+                return;
+            }
+
+            Vector3 dir = closestEnemy.transform.position - this.transform.position;
+
+            Quaternion lookRot = Quaternion.LookRotation(dir);
+
+            //Debug.Log(lookRot.eulerAngles.y);
+            turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
+
+            atkCoolDownLeft -= Time.deltaTime;
+            if (atkCoolDownLeft <= 0 && dir.magnitude <= range)
+            {
+                atkCoolDownLeft = atkCoolDown;
+                ShootEnemy(closestEnemy);
             }
         }
-
-        if (closestEnemy == null)
-        {
-            Debug.Log("No enemies?");
-            return;
-        }
-
-        Vector3 dir = closestEnemy.transform.position - this.transform.position;
-
-        Quaternion lookRot = Quaternion.LookRotation(dir);
-
-        //Debug.Log(lookRot.eulerAngles.y);
-        turretTransform.rotation = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
-
-        atkCoolDownLeft -= Time.deltaTime;
-        if (atkCoolDownLeft <= 0 && dir.magnitude <= range)
-        {
-            atkCoolDownLeft = atkCoolDown;
-            ShootEnemy(closestEnemy);
-        }
-
     }
 
     public void ShootEnemy(EnemyBehaviour closestEnemy)

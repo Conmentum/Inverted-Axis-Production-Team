@@ -14,7 +14,7 @@ public class EnemyBehaviour : MonoBehaviour
     Transform targetPathNode;
     int pathNodeIndex = 0;
 
-    
+
     public Image Healthbar;
 
     [Header("Stats")]
@@ -22,10 +22,14 @@ public class EnemyBehaviour : MonoBehaviour
     public float speed;
     private float slowCooldown = 3;
     public bool slowed;
+    public bool DamageOverTime;
     public int damage;
+    public float dps;
     public float health;
     public float CurrentHealth;
     public int curValue;
+    public float time;
+
 
     // Use this for initialization
     void Start()
@@ -74,13 +78,12 @@ public class EnemyBehaviour : MonoBehaviour
     void Update()
     {
         HasBeenSlowed();
-
         if (CurrentHealth <= 0)
         {
             Die();
             Instantiate(DeathEffect, transform.position, transform.rotation);
         }
-
+        StartCoroutine(DPS());
         if (targetPathNode == null)
         {
             GetNextNode();
@@ -104,20 +107,23 @@ public class EnemyBehaviour : MonoBehaviour
             transform.Translate(direction.normalized * distanceByFrame, Space.World);
             Quaternion rotationToNode = Quaternion.LookRotation(direction);
             //this part is changed from (this.transform.rotation) to enemytransform.rotation
-            EnemyTransform.rotation = Quaternion.Lerp(EnemyTransform.rotation, rotationToNode, Time.deltaTime*speed);
+            EnemyTransform.rotation = Quaternion.Lerp(EnemyTransform.rotation, rotationToNode, Time.deltaTime * speed);
         }
+        StartCoroutine(DPS());
     }
 
     void BaseReached()
     {
-		if (this.gameObject.tag != "Boss") {
-			GameObject.FindObjectOfType<InventoryController> ().lives -= damage;
-			//better implementation
-			Destroy (gameObject);
-		}
-		if (this.gameObject.tag == "Boss") {
-			FindObjectOfType<InventoryController> ().GameOver ();
-		}
+        if (this.gameObject.tag != "Boss")
+        {
+            GameObject.FindObjectOfType<InventoryController>().lives -= damage;
+            //better implementation
+            Destroy(gameObject);
+        }
+        if (this.gameObject.tag == "Boss")
+        {
+            FindObjectOfType<InventoryController>().GameOver();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -135,21 +141,21 @@ public class EnemyBehaviour : MonoBehaviour
     void Die()
     {
 
-		if (this.gameObject.name != "Enemy_Boss(Clone)") 
-		{
+        if (this.gameObject.name != "Enemy_Boss(Clone)")
+        {
             AudioManager.Instance.PlaySound("ShortExplosion");
 
-			GameObject.FindObjectOfType<InventoryController> ().currency += curValue;
-			Instantiate (DeathEffect);
-			Destroy(gameObject);
-		}
-		if (this.gameObject.tag == "Boss")
+            GameObject.FindObjectOfType<InventoryController>().currency += curValue;
+            Instantiate(DeathEffect);
+            Destroy(gameObject);
+        }
+        if (this.gameObject.tag == "Boss")
         {
             AudioManager.Instance.PlaySound("Explosion");
 
-            FindObjectOfType<InventoryController> ().VictoryMenu ();
-			Destroy(gameObject);
-		}
+            FindObjectOfType<InventoryController>().VictoryMenu();
+            Destroy(gameObject);
+        }
     }
     public void HasBeenSlowed()
     {
@@ -172,6 +178,22 @@ public class EnemyBehaviour : MonoBehaviour
         else
         {
             return;
+        }
+    }
+    IEnumerator DPS()
+    {
+        time -= Time.deltaTime;
+        if (DamageOverTime == true)
+        {
+            if (time <= 0)
+            {
+                DamageOverTime = false;
+            }
+            if (time > 0)
+            {
+                TakeDamage(dps);
+                yield return null;
+            }
         }
     }
 }

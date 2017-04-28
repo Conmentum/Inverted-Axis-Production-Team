@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour {
     public float speed;
     public Transform target;
     public float proDamage;
+    public float damageDuration = 1f;
     public float radius;
 
     // Use this for initialization
@@ -47,6 +48,14 @@ public class Projectile : MonoBehaviour {
     {
         if (radius == 0)
         {
+            if (this.gameObject.tag == "Fire")
+            {
+                target.GetComponent<EnemyBehaviour>().DamageOverTime = true;
+                target.GetComponent<EnemyBehaviour>().time = damageDuration;
+                target.GetComponent<EnemyBehaviour>().dps = proDamage;
+                Destroy(this.gameObject);
+                return;
+            }
             target.GetComponent<EnemyBehaviour>().TakeDamage(proDamage);
         }
         else
@@ -69,4 +78,5 @@ public class Projectile : MonoBehaviour {
     {
         target.GetComponent<EnemyBehaviour>().slowed = true;
     }
+
 }
