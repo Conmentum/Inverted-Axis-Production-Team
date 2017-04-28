@@ -5,6 +5,13 @@ using UnityEngine;
 public class TurretPlacement : MonoBehaviour {
 
     public GameObject selectedTurret;
+    public void Update()
+    {
+        if (selectedTurret == null)
+        {
+            return;
+        }
+    }
 
     public void SelectedTurretType(GameObject turret)
     {
