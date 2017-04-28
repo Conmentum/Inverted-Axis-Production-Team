@@ -21,7 +21,7 @@ public class MainMenuScript : MonoBehaviour
     public void OnCredits()
     {
         //Load Credits
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Credits");
     }
 
     public void OnExit()
@@ -31,8 +31,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void OnBack()
     {
-        //Load Credits
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("StartMenu");
     }
 
 }
