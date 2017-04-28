@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
             if (FindObjectOfType<EnemySpawner>()== null)
             {
                 NewWave = false;
+                return;
             }
         }
     }

@@ -70,8 +70,12 @@ public class InventoryController : MonoBehaviour {
 
     void Update()
     {
-        selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
-        //This doesn't actually need to update the text every frame.
+        if (GetComponent<TurretPlacement>().selectedTurret != null)
+        {
+            selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
+        }
+
+        
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
         LoseLife();
