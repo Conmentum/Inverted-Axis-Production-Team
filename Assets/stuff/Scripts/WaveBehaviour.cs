@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class WaveBehaviour : MonoBehaviour {
     public GameObject newWave;
-	
-	// Update is called once per frame
-	void Update () {
+    public bool WaveCompleted;
+
+    // Update is called once per frame
+    public void Start()
+    {
+        WaveCompleted = true;
+        FindObjectOfType<GameController>().NewWave = false;
+    }
+    void Update () {
         if (this.gameObject.GetComponentInChildren<EnemySpawner>() == null)
         {
+            WaveCompleted = true;
             if (FindObjectOfType<GameController>().NewWave == true)
             {
+                
                 Instantiate(newWave, this.transform.position, this.transform.rotation);
-                //Destroy(gameObject);
-                gameObject.SetActive(false);
             }
+            Destroy(gameObject);
+        } 
+        else if (this.gameObject.GetComponent<EnemySpawner>() != null)
+        {
+            GetComponent<EnemySpawner>().waveActive = true;
         }
-
 	}
 }

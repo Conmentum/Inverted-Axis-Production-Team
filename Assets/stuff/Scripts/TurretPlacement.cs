@@ -9,5 +9,6 @@ public class TurretPlacement : MonoBehaviour {
     public void SelectedTurretType(GameObject turret)
     {
         selectedTurret = turret;
+        turret.name = turret.GetComponent<TurretBehaviour>().turretName;
     }
 }

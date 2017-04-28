@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    public Quaternion lockRotation;
     GameObject normPathObj;
     GameObject flyingPathObj;
     public GameObject DeathEffect;
@@ -34,6 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        lockRotation = this.transform.rotation;
         //Healthbar = GetComponent<Image>();
         speed = MaxSpeed;
         CurrentHealth = health;
@@ -77,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        this.transform.rotation = lockRotation;
         HasBeenSlowed();
         if (CurrentHealth <= 0)
         {

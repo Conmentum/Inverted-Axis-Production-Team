@@ -8,6 +8,8 @@ public class TurretBehaviour : MonoBehaviour
     public Transform turretTransform;
     public GameObject projectPrefab;
 
+    public string turretName;
+
     public int cost;
 
     public float range;

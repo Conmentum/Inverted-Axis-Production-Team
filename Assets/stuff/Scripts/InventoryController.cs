@@ -28,7 +28,7 @@ public class InventoryController : MonoBehaviour {
     public int AerialCost;
     public int AreaDMGCost;
 
-
+    public Text selectedTower;
 
     public GameObject generalCanvas;
 	public GameObject victoryCan;
@@ -70,7 +70,7 @@ public class InventoryController : MonoBehaviour {
 
     void Update()
     {
-        
+        selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
         //This doesn't actually need to update the text every frame.
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
