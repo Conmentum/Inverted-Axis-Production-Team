@@ -31,13 +31,15 @@ public class InventoryController : MonoBehaviour {
     public Text selectedTower;
 
     public GameObject generalCanvas;
-	public GameObject victoryCan;
-	public GameObject failCan;
+    public GameObject victoryCan;
+    public GameObject failCan;
 
     [SerializeField]
     public Button Quit;
     [SerializeField]
     public Button Restart;
+    [SerializeField]
+    public Button NextLevel;
 
     public void Start()
     {
@@ -75,12 +77,12 @@ public class InventoryController : MonoBehaviour {
             selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
         }
 
-        
+
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
         LoseLife();
 
-        HealthBarRect.fillAmount = lives/Maxlives;
+        HealthBarRect.fillAmount = lives / Maxlives;
     }
 
     public void OnExit()
@@ -88,7 +90,7 @@ public class InventoryController : MonoBehaviour {
         Application.Quit();
     }
 
-    public void OnQuit()
+    public void OnMenu()
     {
         SceneManager.LoadScene("StartMenu");
     }
@@ -97,8 +99,15 @@ public class InventoryController : MonoBehaviour {
     {
         SceneManager.LoadScene(0);
     }
-	public void VictoryMenu(){
+
+    public void VictoryMenu() {
         generalCanvas.SetActive(false);
         victoryCan.SetActive(true);
-	}
+    }
+
+    public void NexLevel()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+
 }
