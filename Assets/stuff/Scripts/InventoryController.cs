@@ -110,4 +110,9 @@ public class InventoryController : MonoBehaviour {
         SceneManager.LoadScene("Level 2");
     }
 
+    public void NexLevel2()
+    {
+        SceneManager.LoadScene("Level 3");
+    }
+
 }
