@@ -9,6 +9,7 @@ public class EnemyBehaviour : MonoBehaviour
     GameObject normPathObj;
     GameObject flyingPathObj;
     public GameObject DeathEffect;
+    public GameObject top;
 
     public Transform EnemyTransform;
 
@@ -95,6 +96,10 @@ public class EnemyBehaviour : MonoBehaviour
                 BaseReached();
                 return;
             }
+        }
+        if (this.gameObject.tag == "Aerial")
+        {
+            top.transform.Rotate(Vector3.up, 60);
         }
 
         Vector3 direction = targetPathNode.position - this.transform.localPosition;
