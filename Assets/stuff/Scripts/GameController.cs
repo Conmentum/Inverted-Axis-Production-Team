@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour {
     public GameObject Tutor_UI;
     public GameObject Tutor_UI1;
     public GameObject tutor_UI2;
+
+    public GameObject WaveSpawner; 
+
 	// Use this for initialization
 	void Start () {
         if (Tutor_UI == null)
@@ -30,5 +33,6 @@ public class GameController : MonoBehaviour {
     public void UI_transition2()
     {
         Tutor_UI.SetActive(false);
+        WaveSpawner.SetActive(true);
     }
 }

@@ -61,11 +61,11 @@ public class WaveSpawner : MonoBehaviour {
             {
                 StartCoroutine(SpawnWave(waves[NextWave]));
             }
+        }
 
-            else
-            {
-                WaveCountdown -= Time.deltaTime;
-            }
+        else
+        {
+            WaveCountdown -= Time.deltaTime;
         }
     }
 
