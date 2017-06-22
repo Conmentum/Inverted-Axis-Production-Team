@@ -7,11 +7,13 @@ public class GameController : MonoBehaviour {
     public GameObject Tutor_UI;
     public GameObject Tutor_UI1;
     public GameObject tutor_UI2;
+    public GameObject tutor_UI3;
 
     public GameObject WaveSpawner; 
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         if (Tutor_UI == null)
         {
             return;
@@ -32,7 +34,12 @@ public class GameController : MonoBehaviour {
     }
     public void UI_transition2()
     {
-        Tutor_UI.SetActive(false);
+        tutor_UI2.SetActive(false);
+        tutor_UI3.SetActive(true);
+    }
+    public void StartGame()
+    {
+        tutor_UI3.SetActive(false);
         WaveSpawner.SetActive(true);
     }
 }

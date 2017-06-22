@@ -46,7 +46,7 @@ public class WaveSpawner : MonoBehaviour {
         {
             if(!EnemyIsAlive())
             {
-                Debug.Log("wave complete");
+                WaveCompleted();
             }
 
             else
@@ -69,6 +69,26 @@ public class WaveSpawner : MonoBehaviour {
         }
     }
 
+    void WaveCompleted()
+    {
+        Debug.Log("Wave complete");
+
+        state = SpawnState.COUNTING;
+        WaveCountdown = TimeBetweenWaves;
+
+        if(NextWave + 1 > waves.Length - 1)
+        {
+            Debug.Log("All waves complete");
+            this.gameObject.SetActive(false);
+        }
+
+        else
+        {
+            NextWave++;
+        }
+
+    }
+
     bool EnemyIsAlive()
     {
         SearchCountdown -= Time.deltaTime;
@@ -76,7 +96,18 @@ public class WaveSpawner : MonoBehaviour {
         if(SearchCountdown <= 0f)
         {
             SearchCountdown = 1f;
-            if (GameObject.FindGameObjectWithTag("Enemy") == null || GameObject.FindGameObjectWithTag("Aerial") == null || GameObject.FindGameObjectWithTag("Boss") == null)
+
+            if (GameObject.FindGameObjectWithTag("Enemy") == null)
+            {
+                return false;
+            }
+
+            else if (GameObject.FindGameObjectWithTag("Aerial") == null && GameObject.FindGameObjectWithTag("Enemy") == null)
+            {
+                return false;
+            }
+
+            else if (GameObject.FindGameObjectWithTag("Boss") == null && GameObject.FindGameObjectWithTag("Aerial") == null && GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 return false;
             }

@@ -43,6 +43,11 @@ public class InventoryController : MonoBehaviour {
 
     public void Start()
     {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+
         lives = Maxlives;
 
         NormalCostText.text = NormalCost.ToString();
@@ -67,10 +72,16 @@ public class InventoryController : MonoBehaviour {
         Debug.Log("Game Over");
         generalCanvas.SetActive(false);
         failCan.SetActive(true);
+        Time.timeScale = 0;
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("StartMenu");
+        }
+
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
         LoseLife();
