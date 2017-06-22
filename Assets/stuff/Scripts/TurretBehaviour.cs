@@ -50,7 +50,6 @@ public class TurretBehaviour : MonoBehaviour
 
             if (closestEnemy == null)
             {
-                Debug.Log("No enemies?");
                 return;
             }
 
@@ -91,7 +90,6 @@ public class TurretBehaviour : MonoBehaviour
 
             if (closestEnemy == null)
             {
-                Debug.Log("No enemies?");
                 return;
             }
 

@@ -39,7 +39,6 @@ public class EnemyBehaviour : MonoBehaviour
         //Healthbar = GetComponent<Image>();
         speed = MaxSpeed;
         CurrentHealth = health;
-        Debug.Log("Health set");
 
         normPathObj = GameObject.Find("Normal Path");
         flyingPathObj = GameObject.Find("Flying Path");
