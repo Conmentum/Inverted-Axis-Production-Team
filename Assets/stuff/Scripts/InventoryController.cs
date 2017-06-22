@@ -51,7 +51,6 @@ public class InventoryController : MonoBehaviour {
         AerialCostText.text = AerialCost.ToString();
         AreaDMGCostText.text = AreaDMGCost.ToString();
     }
-
     public Image HealthBarRect;
 
     public void LoseLife()
@@ -72,17 +71,15 @@ public class InventoryController : MonoBehaviour {
 
     void Update()
     {
-        if (GetComponent<TurretPlacement>().selectedTurret != null)
-        {
-            selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
-        }
-
-
         currencyText.text = currency.ToString();
         livesText.text = lives.ToString();
         LoseLife();
 
         HealthBarRect.fillAmount = lives / Maxlives;
+        if (GetComponent<TurretPlacement>().selectedTurret != null)
+        {
+            selectedTower.text = GetComponent<TurretPlacement>().selectedTurret.name;
+        }
     }
 
     public void OnExit()
